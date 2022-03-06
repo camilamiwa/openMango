@@ -1,6 +1,7 @@
 import React from 'react'
-import './login.css';
 import { Link } from "react-router-dom";
+
+import './login.css';
 
 function LoginForms() {
     return (
@@ -16,7 +17,7 @@ function LoginForms() {
 function LoginButtons() {
     return (
         <div>
-            <Link to="../">Entre</Link>
+            <Link to="../home/noAccounts">Entre</Link>
             <p>OU</p>
 
             <Link to="../cadastro">Cadastre-se</Link>

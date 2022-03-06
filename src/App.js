@@ -1,8 +1,9 @@
 import React from 'react'
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import Login from './login/login'
-import Cadastro from './cadastro/cadastro'
+import Login from './pages/login/login'
+import Cadastro from './pages/cadastro/cadastro'
+import Home from './pages/home/home'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/home/noAccounts" element={<Home />} />
       </Routes>
 
 
