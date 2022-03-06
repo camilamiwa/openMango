@@ -18,7 +18,7 @@ const Cadastro = () => {
         fetch('http://localhost:5000/cadastrar/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(blog)
+            body: JSON.stringify(user)
         }).then(() => {
             console.log('new user added');
         })

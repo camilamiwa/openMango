@@ -16,9 +16,11 @@ function LoginForms() {
 function LoginButtons() {
     return (
         <div>
-            <Link to="../cadastro">Cadastrar</Link>
-            <Link to="../">Entrar</Link>
+            <Link to="../">Entre</Link>
+            <p>OU</p>
 
+            <Link to="../cadastro">Cadastre-se</Link>
+            
             {/* <button >Entrar</button>
             <button>Cadastrar</button> */}
         </div>
@@ -28,7 +30,9 @@ function LoginButtons() {
 function Login() {
   return (
     <div>
+        <h3>Entrar</h3>
         <LoginForms />
+        <br></br>
         <LoginButtons />
     </div>
   );
