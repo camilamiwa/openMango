@@ -6,7 +6,7 @@ import * as RiIcons from 'react-icons/ri';
 export const SidebarData = [
   {
     title: 'Adicionar conta',
-    path: '/addAccount',
+    path: '/add_account',
     icon: <MdIcons.MdOutlineAccountBalanceWallet />,
     className: 'nav-text'
   },

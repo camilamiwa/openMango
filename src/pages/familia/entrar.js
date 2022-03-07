@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Navbar from '../../components/Navbar';
 
 const FamiliaEntrar = () => {
     const [nomeFamilia, setNomeFamilia] = useState('');
@@ -28,30 +29,31 @@ const FamiliaEntrar = () => {
 
     return (
         <div>
-        <h2>Entre em uma família</h2>
-        <form onSubmit={handleSubmit}>
-            <label>Insira o nome da sua família: </label>
-            <input
-            type="text" 
-            required 
-            value={nomeFamilia}
-            onChange={(e) => setNomeFamilia(e.target.value)}
-            />
-            <br></br>
-            <br></br>
+            <Navbar/>
+            <h2>Entre em uma família</h2>
+            <form onSubmit={handleSubmit}>
+                <label>Insira o nome da sua família: </label>
+                <input
+                type="text" 
+                required 
+                value={nomeFamilia}
+                onChange={(e) => setNomeFamilia(e.target.value)}
+                />
+                <br></br>
+                <br></br>
 
-            <label>Insira a senha da família: </label>
-            <input 
-            type="password" 
-            required 
-            value={senhaFamilia}
-            onChange={(e) => setSenhaFamilia(e.target.value)}
-            />
-            <br></br>
-            <br></br>
+                <label>Insira a senha da família: </label>
+                <input 
+                type="password" 
+                required 
+                value={senhaFamilia}
+                onChange={(e) => setSenhaFamilia(e.target.value)}
+                />
+                <br></br>
+                <br></br>
 
-            <button>Entrar na família</button>
-        </form>
+                <button>Entrar na família</button>
+            </form>
         </div>
     );
     }

@@ -10,6 +10,9 @@ import SemFamilia from './pages/familia/semFamilia';
 import FamiliaCriar from './pages/familia/criar';
 import FamiliaEntrar from './pages/familia/entrar';
 import FamiliaDados from './pages/familia/dados';
+import FamiliaSemContas from './pages/familia/semContas';
+
+import AddAccount from './pages/addAccount';
 
 function App() {
   return (
@@ -27,10 +30,13 @@ function App() {
         {/* family */}
         <Route path="/family" element={<FamiliaHome />} />
         <Route path="/family/no_family" element={<SemFamilia />} />
+        <Route path="/family/no_accounts" element={<FamiliaSemContas />} />
         <Route path="/family/create_family" element={<FamiliaCriar />} />
         <Route path="/family/join_family" element={<FamiliaEntrar />} />
         <Route path="/family/info_family" element={<FamiliaDados />} />
 
+        {/* family */}
+        <Route path="/add_account" element={<AddAccount />} />
 
       </Routes>
     </div>
