@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import './cadastro.css';
-import { Link } from "react-router-dom";
 
 const Cadastro = () => {
     const [nome, setNome] = useState('');

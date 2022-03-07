@@ -6,13 +6,6 @@ import Navbar from '../../components/Navbar';
 import SemContas from './semContas';
 
 const Home = () => {
-    // return (
-    //     <div>
-    //       <Routes>
-    //         <Route path="/noAccounts" element={<SemContas />} />
-    //       </Routes>    
-    //     </div>
-    //   );
     return (
         <div>
           <Navbar/>
