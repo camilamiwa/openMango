@@ -15,13 +15,14 @@ const Cadastro = () => {
         e.preventDefault();
         const user = { nome, nascimento, cpf, endereco, telefone, email, senha };
         
-        fetch('http://localhost:5000/cadastrar/', {
+        fetch('http://localhost:5000/cadastrar', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)
-        }).then(() => {
-            console.log('new user added');
         })
+        .then(response => response.json())
+        .then(data => console.log(data.mensagem));
+
     }
 
     // somente quando clicar no link de cadastrar
