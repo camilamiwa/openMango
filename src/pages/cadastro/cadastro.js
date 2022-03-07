@@ -99,7 +99,7 @@ const Cadastro = () => {
 
             <label>Senha: </label>
             <input 
-            type="text" 
+            type="password" 
             required 
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
