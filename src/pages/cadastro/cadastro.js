@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import './cadastro.css';
 
 const Cadastro = () => {
@@ -10,6 +11,8 @@ const Cadastro = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     // const [senhaConfirmacao, setSenhaConfirmacao] = useState('');
+    
+    let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,8 +24,8 @@ const Cadastro = () => {
             body: JSON.stringify(user)
         })
         .then(response => response.json())
-        .then(data => console.log(data.mensagem));
-
+        // .then(data => console.log(data.mensagem));
+        .then(data => {data.mensagem ? navigate("/cadastro/successful") : navigate("/cadastro/failed")});
     }
 
     // somente quando clicar no link de cadastrar

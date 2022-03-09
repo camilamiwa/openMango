@@ -3,6 +3,9 @@ import './App.css';
 import { Routes, Route } from "react-router-dom";
 import Login from './pages/login/login'
 import Cadastro from './pages/cadastro/cadastro'
+import CadastroFailed from './pages/cadastro/cadastroFailed'
+import CadastroSuccess from './pages/cadastro/cadastroSuccess'
+
 import Home from './pages/home/home'
 
 import FamiliaHome from './pages/familia/home'
@@ -21,6 +24,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/cadastro/failed" element={<CadastroFailed />} />
+        <Route path="/cadastro/successful" element={<CadastroSuccess />} />
 
 
         {/* home */}
