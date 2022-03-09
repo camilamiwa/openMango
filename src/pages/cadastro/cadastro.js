@@ -25,7 +25,7 @@ const Cadastro = () => {
         })
         .then(response => response.json())
         // .then(data => console.log(data.mensagem));
-        .then(data => {data.mensagem ? navigate("/cadastro/successful") : navigate("/cadastro/failed")});
+        .then(data => {data.mensagem === "OK" ? navigate("/cadastro/successful/") : navigate("/cadastro/failed/")});
     }
 
     // somente quando clicar no link de cadastrar
@@ -110,7 +110,8 @@ const Cadastro = () => {
             />
             <br></br>
             <br></br>
-{/* 
+            
+            {/* 
             <label>Confirme sua senha:</label>
             <input 
             type="text" 
