@@ -22,26 +22,26 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/cadastro/failed" element={<CadastroFailed />} />
-        <Route path="/cadastro/successful" element={<CadastroSuccess />} />
+        <Route path="/login/" element={<Login />} />
+        <Route path="/cadastro/" element={<Cadastro />} />
+        <Route path="/cadastro/failed/" element={<CadastroFailed />} />
+        <Route path="/cadastro/successful/" element={<CadastroSuccess />} />
 
 
         {/* home */}
-        <Route path="/home/noAccounts" element={<Home />} />
+        <Route path="/home/noAccounts/" element={<Home />} />
 
 
         {/* family */}
-        <Route path="/family" element={<FamiliaHome />} />
-        <Route path="/family/no_family" element={<SemFamilia />} />
-        <Route path="/family/no_accounts" element={<FamiliaSemContas />} />
-        <Route path="/family/create_family" element={<FamiliaCriar />} />
-        <Route path="/family/join_family" element={<FamiliaEntrar />} />
-        <Route path="/family/info_family" element={<FamiliaDados />} />
+        <Route path="/family/" element={<FamiliaHome />} />
+        <Route path="/family/no_family/" element={<SemFamilia />} />
+        <Route path="/family/no_accounts/" element={<FamiliaSemContas />} />
+        <Route path="/family/create_family/" element={<FamiliaCriar />} />
+        <Route path="/family/join_family/" element={<FamiliaEntrar />} />
+        <Route path="/family/info_family/" element={<FamiliaDados />} />
 
         {/* family */}
-        <Route path="/add_account" element={<AddAccount />} />
+        <Route path="/add_account/" element={<AddAccount />} />
 
       </Routes>
     </div>

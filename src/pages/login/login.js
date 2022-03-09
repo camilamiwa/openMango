@@ -9,7 +9,7 @@ const Login = () => {
     const [senha, setSenha] = useState('');
     
     let navigate = useNavigate();
-    let logged = true
+    const [logged, setLogged] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +22,7 @@ const Login = () => {
         })
         .then(response => response.json())
         // .then(data => console.log(data.mensagem));
-        .then(data => {data.mensagem === "OK" ? navigate("/home/noAccounts/") : logged = false});
+        .then(data => {data.mensagem === "OK" ? navigate("/home/noAccounts/") : setLogged(false)});
     }
 
     return (
