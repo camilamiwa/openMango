@@ -1,13 +1,13 @@
 import React from 'react'
 import Navbar from '../../components/Navbar';
 
-function FamiliaDados() {
+const MeusDados = () => {
   return (
     <div>
-      <Navbar />
-        <h3>Dados família</h3>
+        <Navbar />
+        <h3>Meus dados - contas</h3>
     </div>
   );
 }
-
-export default FamiliaDados;
+   
+export default MeusDados;

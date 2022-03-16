@@ -6,6 +6,8 @@ import Cadastro from './pages/cadastro/cadastro'
 import CadastroFailed from './pages/cadastro/cadastroFailed'
 import CadastroSuccess from './pages/cadastro/cadastroSuccess'
 
+import MeusDados from './pages/my_accounts/my_home'
+
 import Home from './pages/home/home'
 
 import FamiliaHome from './pages/familia/home'
@@ -15,7 +17,7 @@ import FamiliaEntrar from './pages/familia/entrar';
 import FamiliaDados from './pages/familia/dados';
 import FamiliaSemContas from './pages/familia/semContas';
 
-import AddAccount from './pages/addAccount';
+import AddAccount from './pages/add_account/addAccount';
 
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
         <Route path="/cadastro/" element={<Cadastro />} />
         <Route path="/cadastro/failed/" element={<CadastroFailed />} />
         <Route path="/cadastro/successful/" element={<CadastroSuccess />} />
+
+        {/* my accounts */}
+        <Route path="/my_accounts/" element={<MeusDados />} />
 
 
         {/* home */}

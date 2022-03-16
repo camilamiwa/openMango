@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 
 const FamiliaCriar = () => {
-    const [idFamilia, setIdFamilia] = useState('');
-    const [nomeFamilia, setNomeFamilia] = useState('');
-    const [senhaFamilia, setSenhaFamilia] = useState('');
+    const [id_familia, setIdFamilia] = useState('');
+    const [nome, setNomeFamilia] = useState('');
+    const [senha, setSenhaFamilia] = useState('');
     const [showMessage, setShowMessage] = useState(true);
     
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const new_family = { idFamilia, nomeFamilia, senhaFamilia };       
+        const new_family = { id_familia, nome, senha };       
         
         
         fetch('http://localhost:5000/criarfamilia', {
@@ -49,7 +49,7 @@ const FamiliaCriar = () => {
                 <input
                 type="text" 
                 required 
-                value={nomeFamilia}
+                value={ nome }
                 onChange={(e) => setNomeFamilia(e.target.value)}
                 />
                 <br></br>
@@ -59,7 +59,7 @@ const FamiliaCriar = () => {
                 <input
                 type="text" 
                 required 
-                value={idFamilia}
+                value={ id_familia }
                 onChange={(e) => setIdFamilia(e.target.value)}
                 />
                 <br></br>
@@ -69,7 +69,7 @@ const FamiliaCriar = () => {
                 <input 
                 type="password" 
                 required 
-                value={senhaFamilia}
+                value={ senha }
                 onChange={(e) => setSenhaFamilia(e.target.value)}
                 />
                 <br></br>

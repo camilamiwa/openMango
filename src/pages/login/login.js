@@ -22,7 +22,25 @@ const Login = () => {
         })
         .then(response => response.json())
         // .then(data => console.log(data.mensagem));
-        .then(data => {data.mensagem === "OK" ? navigate("/home/noAccounts/") : setLogged(false)});
+        .then(data => {
+            if (data.mensagem === "OK") {
+                fetch('http://localhost:5000/temfamilia', {
+                    method: 'GET',
+                    headers: { "Content-Type": "application/json" }
+                })
+                .then(second => second.json())
+                // .then(data2 => console.log(data2.mensagem));
+                .then(data2 => {
+                    if (data2.mensagem === "FALSE") {
+                        navigate("/family/no_family/")
+                    } else{
+                        navigate("/family/info_family/")
+                    } 
+                });                
+            } else {
+                setLogged(false)
+            }
+        });
     }
 
     return (
