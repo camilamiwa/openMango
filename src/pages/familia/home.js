@@ -1,25 +1,31 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import './home.css';
-import Navbar from '../../components/Navbar';
+// import Navbar from '../../components/Navbar';
+
+import SemFamilia from './semFamilia';
+import FamiliaDados from './dados';
 
 const FamiliaHome = () => {
-    return (
-        <div>
-          <Navbar/>
-          <h1>Menu Família</h1>
-          <Link to="no_family">Sem família cadastrada</Link>
-          <br/>
-          <Link to="create_family">Criar</Link>
-          <br/>
-          <Link to="join_family">Join</Link>
-          <br/>
-          <Link to="info_family">Info</Link>
-          <br/>
-          <Link to="no_accounts">No accounts</Link>
-        </div>
-      );
-    }
+  let navigate = useNavigate();
+
+  fetch('http://localhost:5000/temfamilia', {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.json())
+    // .then(data => console.log(data))
+    .then(data => {
+        if (data.mensagem === "FALSE") {
+            return <SemFamilia />
+        } else{
+            return <FamiliaDados />
+            // navigate("/family/info_family/")
+        } 
+    });  
+
+    return <FamiliaDados />
+}
    
 export default FamiliaHome;
