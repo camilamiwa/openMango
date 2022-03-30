@@ -15,7 +15,7 @@ const Login = () => {
         e.preventDefault();
         const login = { email, senha };
         
-        fetch('http://localhost:5000/login', {
+        fetch('https://acc-manager.southindia.cloudapp.azure.com/login', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(login)
@@ -24,7 +24,7 @@ const Login = () => {
         // .then(data => console.log(data.mensagem));
         .then(data => {
             if (data.mensagem === "OK") {
-                fetch('http://localhost:5000/temfamilia', {
+                fetch('https://acc-manager.southindia.cloudapp.azure.com/temfamilia', {
                     method: 'GET',
                     headers: { "Content-Type": "application/json" }
                 })

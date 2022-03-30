@@ -15,7 +15,7 @@ const FamiliaCriar = () => {
         const new_family = { id_familia, nome, senha };       
         
         
-        fetch('http://localhost:5000/criarfamilia', {
+        fetch('https://acc-manager.southindia.cloudapp.azure.com/criarfamilia', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(new_family)

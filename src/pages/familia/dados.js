@@ -9,7 +9,7 @@ function FamiliaDados() {
     const [users, setUsers] = useState(['']);
   
     useEffect(() => {
-        fetch('http://localhost:5000/centralizarcontas', {
+        fetch('https://acc-manager.southindia.cloudapp.azure.com/centralizarcontas', {
             method: 'GET', 
             headers: { "Content-Type": "application/json" }
         })

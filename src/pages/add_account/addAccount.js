@@ -18,7 +18,7 @@ const AddAccount = () => {
         const new_account = { id_banco, agencia, cc };       
         console.log(new_account)
         
-        fetch('http://localhost:5000/addconta', {
+        fetch('https://acc-manager.southindia.cloudapp.azure.com/addconta', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(new_account)

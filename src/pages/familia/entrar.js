@@ -14,7 +14,7 @@ const FamiliaEntrar = () => {
         e.preventDefault();
         const join_family = { idFamilia, senhaFamilia };
         
-        fetch('http://localhost:5000/entrarfamilia', {
+        fetch('https://acc-manager.southindia.cloudapp.azure.com/entrarfamilia', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(join_family)
