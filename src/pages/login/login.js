@@ -7,6 +7,8 @@ import './login.css';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+
+    const [id_login, setLogin] = useState('');
     
     let navigate = useNavigate();
     const [logged, setLogged] = useState(true);
@@ -24,9 +26,16 @@ const Login = () => {
         // .then(data => console.log(data.mensagem));
         .then(data => {
             if (data.mensagem === "OK") {
+                console.log("login -> " + typeof(data.idLogin))
+                setLogin(String(data.idLogin))
+                const body_tem_familia = { id_login, email, senha };
+                console.log(body_tem_familia)
                 fetch('http://localhost:5000/temfamilia', {
-                    method: 'GET',
-                    headers: { "Content-Type": "application/json" }
+                    method: 'POST',
+                    headers: { 
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body_tem_familia)
                 })
                 .then(second => second.json())
                 // .then(data2 => console.log(data2.mensagem));
@@ -35,10 +44,12 @@ const Login = () => {
                         navigate("/family/no_family/")
                     } else{
                         navigate("/family/info_family/")
-                    } 
+                    }                     
+                    setLogin('')
                 });                
             } else {
                 setLogged(false)
+                setLogin('')
             }
         });
     }
