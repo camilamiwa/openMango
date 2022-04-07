@@ -1,38 +1,52 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import { GlobalContext } from '../../context/GlobalContext';
+
+async function fetchFamilia(token, new_family) {
+    return fetch('http://localhost:5000/criarfamilia', {
+        method: 'POST',
+        headers: { 
+            "Content-Type": "application/json",
+            'x-access-token': token
+        },
+        body: JSON.stringify(new_family)
+    })
+}
+
+async function handleClick(token, new_family,
+    navigate,
+    setShowMessage,
+    setIdFamilia,
+    setSenhaFamilia) {
+        const response = await fetchFamilia(token, new_family)
+        const data = await response.json()
+        if (data.mensagem === "ID_NAO_DISPONIVEL") {
+            setShowMessage(false)
+            setIdFamilia('')
+            setSenhaFamilia('')
+        } else {
+            navigate("/family/info_family/")
+        }
+}
 
 const FamiliaCriar = () => {
     const [id_familia, setIdFamilia] = useState('');
     const [nome, setNomeFamilia] = useState('');
     const [senha, setSenhaFamilia] = useState('');
     const [showMessage, setShowMessage] = useState(true);
+    const { token } = useContext(GlobalContext) 
     
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const new_family = { id_familia, nome, senha };       
-        
-        
-        fetch('http://localhost:5000/criarfamilia', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(new_family)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.mensagem === "OK") {
-                navigate("/family/info_family/")
-            } else if (data.mensagem === "ID_NAO_DISPONIVEL") {
-                setShowMessage(false)
-                setIdFamilia('')
-                setSenhaFamilia('')
-            } else {
-                navigate("/family/info_family/")
-            }
-        
-        });
+        const new_family = { id_familia, nome, senha };         
+        handleClick(token, new_family,
+            navigate,
+            setShowMessage,
+            setIdFamilia,
+            setSenhaFamilia)
     }
 
     return (

@@ -1,44 +1,60 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import { GlobalContext } from '../../context/GlobalContext';
+
+async function fetchFamilia(token, join_family) {
+    return fetch('http://localhost:5000/entrarfamilia', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            'x-access-token': token
+        },
+        body: JSON.stringify(join_family)
+    })
+}
+
+async function handleClick(token, join_family,
+    navigate,
+    setShowIdFamiliyMsg,
+    setShowPasswordMsg,
+    setid_familia,
+    setsenha) {
+        const response = await fetchFamilia(token, join_family)
+        const data = await response.json()
+        if (data.mensagem === "INC_OU_NEX") {
+            setShowIdFamiliyMsg(false)
+            setShowPasswordMsg(true)
+            setid_familia('')
+            setsenha('')
+        } else if (data.mensagem === "SENHA_INCORRETA") {
+            setShowPasswordMsg(false)
+            setShowIdFamiliyMsg(true)
+            setid_familia('')
+            setsenha('')
+        } else {
+            navigate("/family/info_family/")
+        }
+}
 
 const FamiliaEntrar = () => {
-    const [idFamilia, setIdFamilia] = useState('');
-    const [senhaFamilia, setSenhaFamilia] = useState('');
+    const [id_familia, setid_familia] = useState('');
+    const [senha, setsenha] = useState('');
     const [showPasswordMsg, setShowPasswordMsg] = useState(true);
     const [showIdFamiliyMsg, setShowIdFamiliyMsg] = useState(true);
+    const { token } = useContext(GlobalContext) 
     
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const join_family = { idFamilia, senhaFamilia };
-        
-        fetch('http://localhost:5000/entrarfamilia', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(join_family)
-        })
-        .then(response => response.json())
-        // .then(data => console.log(data.mensagem));
-        .then(data => {
-            if (data.mensagem === "OK") {
-                navigate("/family/info_family/")
-            } else if (data.mensagem === "INC_OU_NEX") {
-                setShowIdFamiliyMsg(false)
-                setShowPasswordMsg(true)
-                setIdFamilia('')
-                setSenhaFamilia('')
-            } else if (data.mensagem === "SENHA_INCORRETA") {
-                setShowPasswordMsg(false)
-                setShowIdFamiliyMsg(true)
-                setIdFamilia('')
-                setSenhaFamilia('')
-            } else {
-                navigate("/family/info_family/")
-            }
-        
-        });
+        const join_family = { id_familia, senha };
+        handleClick(token, join_family,
+            navigate,
+            setShowIdFamiliyMsg,
+            setShowPasswordMsg,
+            setid_familia,
+            setsenha)
     }
 
     return (
@@ -58,8 +74,8 @@ const FamiliaEntrar = () => {
                 <input
                 type="text" 
                 required 
-                value={ idFamilia }
-                onChange={(e) => setIdFamilia(e.target.value)}
+                value={ id_familia }
+                onChange={(e) => setid_familia(e.target.value)}
                 />
                 <br></br>
                 <br></br>
@@ -68,8 +84,8 @@ const FamiliaEntrar = () => {
                 <input 
                 type="password" 
                 required 
-                value={ senhaFamilia }
-                onChange={(e) => setSenhaFamilia(e.target.value)}
+                value={ senha }
+                onChange={(e) => setsenha(e.target.value)}
                 />
                 <br></br>
                 <br></br>

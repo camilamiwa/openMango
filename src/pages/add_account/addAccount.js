@@ -1,6 +1,54 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import { GlobalContext } from '../../context/GlobalContext';
+
+async function fetchContas(token, new_account) {
+    return fetch('http://localhost:5000/addconta', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            'x-access-token': token
+        },
+        body: JSON.stringify(new_account)
+    })
+}
+
+async function handleClick(token, new_account,
+    navigate,
+    setShowOutroCpfMsg,
+    setShowDadosIncorretosMsg,
+    setShowJaAdicionadaMsg,
+    setIdBanco,
+    setAgencia,
+    setCc) {    
+        const response = await fetchContas(token, new_account)
+        const data = await response.json()
+        if (data.mensagem === "OK") {
+            navigate("/my_accounts/")
+        } else if (data.mensagem === "OUTRO_CPF") {
+            setShowOutroCpfMsg(false)
+            setShowDadosIncorretosMsg(true)
+            setShowJaAdicionadaMsg(true)
+            setIdBanco('')
+            setAgencia('')
+            setCc('')
+        } else if (data.mensagem === "NAO_ENCONTRADA") {
+            setShowDadosIncorretosMsg(false)
+            setShowOutroCpfMsg(true)
+            setShowJaAdicionadaMsg(true)
+            setIdBanco('')
+            setAgencia('')
+            setCc('')
+        } else if (data.mensagem === "JA_ADICIONADA") {
+            setShowJaAdicionadaMsg(false)
+            setShowOutroCpfMsg(true)
+            setShowDadosIncorretosMsg(true)
+            setIdBanco('')
+            setAgencia('')
+            setCc('')
+        } 
+}
 
 const AddAccount = () => {
     const [id_banco, setIdBanco] = useState('1');
@@ -11,46 +59,22 @@ const AddAccount = () => {
     const [showDadosIncorretosMsg, setShowDadosIncorretosMsg] = useState(true);
     const [showJaAdicionadaMsg, setShowJaAdicionadaMsg] = useState(true);
     
+    const { token } = useContext(GlobalContext) 
+
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const new_account = { id_banco, agencia, cc };       
-        console.log(new_account)
+        const new_account = { id_banco, agencia, cc };  
         
-        fetch('http://localhost:5000/addconta', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(new_account)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.mensagem === "OK") {
-                navigate("/my_accounts/")
-            } else if (data.mensagem === "OUTRO_CPF") {
-                setShowOutroCpfMsg(false)
-                setShowDadosIncorretosMsg(true)
-                setShowJaAdicionadaMsg(true)
-                setIdBanco('')
-                setAgencia('')
-                setCc('')
-            } else if (data.mensagem === "NAO_ENCONTRADA") {
-              setShowDadosIncorretosMsg(false)
-              setShowOutroCpfMsg(true)
-              setShowJaAdicionadaMsg(true)
-              setIdBanco('')
-              setAgencia('')
-              setCc('')
-            } else if (data.mensagem === "JA_ADICIONADA") {
-              setShowJaAdicionadaMsg(false)
-              setShowOutroCpfMsg(true)
-              setShowDadosIncorretosMsg(true)
-              setIdBanco('')
-              setAgencia('')
-              setCc('')
-            } 
-        
-        });
+        handleClick(token, new_account,
+            navigate,
+            setShowOutroCpfMsg,
+            setShowDadosIncorretosMsg,
+            setShowJaAdicionadaMsg,
+            setIdBanco,
+            setAgencia,
+            setCc)
     }
 
     return (

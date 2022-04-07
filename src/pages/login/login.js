@@ -1,14 +1,55 @@
-import React, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
+import { GlobalContext } from '../../context/GlobalContext';
+
 import './login.css';
+
+async function fetchTemFamilia(token) {
+    return fetch('http://localhost:5000/temfamilia', {
+        method: 'GET',
+        headers: { 
+            'x-access-token': token
+        }
+    })
+}
+
+async function fetchLogin(login) {
+    return fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(login)
+    })    
+}
+
+async function handleClick(navigate, login, setIdLogin, setToken, setLogged) {
+    const response = await fetchLogin(login)
+    const data = await response.json()
+    if (data.mensagem === "OK") {
+        setToken( data.token )   
+        const auxToken = data.token
+
+        const second = await fetchTemFamilia(auxToken)
+        const data2 = await second.json()
+        if (data2.mensagem === "FALSE") {
+            navigate("/family/no_family/")
+        } else{
+            navigate("/family/info_family/")
+        }                     
+        setIdLogin('')
+    } else {
+        setLogged(false)
+        setIdLogin('')
+    }
+}
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-
-    const [id_login, setLogin] = useState('');
+    
+    const { id_login, setIdLogin } = useContext(GlobalContext) 
+    const { token, setToken } = useContext(GlobalContext) 
     
     let navigate = useNavigate();
     const [logged, setLogged] = useState(true);
@@ -16,42 +57,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const login = { email, senha };
-        
-        fetch('http://localhost:5000/login', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(login)
-        })
-        .then(response => response.json())
-        // .then(data => console.log(data.mensagem));
-        .then(data => {
-            if (data.mensagem === "OK") {
-                console.log("login -> " + typeof(data.idLogin))
-                setLogin(String(data.idLogin))
-                const body_tem_familia = { id_login, email, senha };
-                console.log(body_tem_familia)
-                fetch('http://localhost:5000/temfamilia', {
-                    method: 'POST',
-                    headers: { 
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(body_tem_familia)
-                })
-                .then(second => second.json())
-                // .then(data2 => console.log(data2.mensagem));
-                .then(data2 => {
-                    if (data2.mensagem === "FALSE") {
-                        navigate("/family/no_family/")
-                    } else{
-                        navigate("/family/info_family/")
-                    }                     
-                    setLogin('')
-                });                
-            } else {
-                setLogged(false)
-                setLogin('')
-            }
-        });
+        handleClick(navigate, login, setIdLogin, setToken, setLogged)
     }
 
     return (

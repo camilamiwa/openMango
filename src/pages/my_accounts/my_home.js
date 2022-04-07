@@ -1,28 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import Navbar from '../../components/Navbar';
+
+import { GlobalContext } from '../../context/GlobalContext';
 import './my_home.css';
 
-function MeusDados() {
+async function fetchContasInfo(token) {
+  return fetch('http://localhost:5000/centralizarcontas', {
+      method: 'GET', 
+      headers: { 
+        'x-access-token': token
+      }
+  });    
+}
+
+async function handleFetch(token, 
+  setAccounts,
+  setSaldoCC,
+  setSaldoPP) {  
+    const response = await fetchContasInfo(token)
+    const data = await response.json()
+    setAccounts(data["membros"][0]["contas"])
+    setSaldoCC(parseFloat(data["membros"][0]["saldo_cc"]))
+    setSaldoPP(parseFloat(data["membros"][0]["saldo_pp"]))
+}
+
+const MeusDados = () => {
     const [saldoCC, setSaldoCC] = useState('');
     const [saldoPP, setSaldoPP] = useState('');
     const [accounts, setAccounts] = useState(['']);
-  
-    useEffect(() => {
-        fetch('http://localhost:5000/centralizarcontas', {
-            method: 'GET', 
-            headers: { "Content-Type": "application/json" }
-        })
-        .then(response => response.json())
-        // .then(data => console.log(data));
-        .then(data => {
-          console.log("centralizar contas - user")
-          setAccounts(data["membros"][0]["contas"])
-          setSaldoCC(parseFloat(data["membros"][0]["saldo_cc"]))
-          setSaldoPP(parseFloat(data["membros"][0]["saldo_pp"]))
-        });    
-    }, []);
+    
+    const { token } = useContext(GlobalContext) 
 
+    useEffect(() => {
+      handleFetch(token, 
+        setAccounts,
+        setSaldoCC,
+        setSaldoPP)
+    }, [] );  
+
+    
     return (
         <div>
         <Navbar />

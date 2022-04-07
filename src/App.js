@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css';
 import { Routes, Route } from "react-router-dom";
+
 import Login from './pages/login/login'
 import Cadastro from './pages/cadastro/cadastro'
 import CadastroFailed from './pages/cadastro/cadastroFailed'
@@ -18,38 +19,41 @@ import FamiliaDados from './pages/familia/dados';
 import FamiliaSemContas from './pages/familia/semContas';
 
 import AddAccount from './pages/add_account/addAccount';
+import GlobalContextProvider, { GlobalContext } from './context/GlobalContext';
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login/" element={<Login />} />
-        <Route path="/cadastro/" element={<Cadastro />} />
-        <Route path="/cadastro/failed/" element={<CadastroFailed />} />
-        <Route path="/cadastro/successful/" element={<CadastroSuccess />} />
+    <GlobalContextProvider>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login/" element={<Login />} />
+          <Route path="/cadastro/" element={<Cadastro />} />
+          <Route path="/cadastro/failed/" element={<CadastroFailed />} />
+          <Route path="/cadastro/successful/" element={<CadastroSuccess />} />
 
-        {/* my accounts */}
-        <Route path="/my_accounts/" element={<MeusDados />} />
-
-
-        {/* home */}
-        <Route path="/home/noAccounts/" element={<Home />} />
+          {/* my accounts */}
+          <Route path="/my_accounts/" element={<MeusDados />} />
 
 
-        {/* family */}
-        <Route path="/family/" element={<FamiliaHome />} />
-        <Route path="/family/no_family/" element={<SemFamilia />} />
-        <Route path="/family/no_accounts/" element={<FamiliaSemContas />} />
-        <Route path="/family/create_family/" element={<FamiliaCriar />} />
-        <Route path="/family/join_family/" element={<FamiliaEntrar />} />
-        <Route path="/family/info_family/" element={<FamiliaDados />} />
+          {/* home */}
+          <Route path="/home/noAccounts/" element={<Home />} />
 
-        {/* family */}
-        <Route path="/add_account/" element={<AddAccount />} />
 
-      </Routes>
-    </div>
+          {/* family */}
+          <Route path="/family/" element={<FamiliaHome />} />
+          <Route path="/family/no_family/" element={<SemFamilia />} />
+          <Route path="/family/no_accounts/" element={<FamiliaSemContas />} />
+          <Route path="/family/create_family/" element={<FamiliaCriar />} />
+          <Route path="/family/join_family/" element={<FamiliaEntrar />} />
+          <Route path="/family/info_family/" element={<FamiliaDados />} />
+
+          {/* family */}
+          <Route path="/add_account/" element={<AddAccount />} />
+
+        </Routes>
+      </div>
+    </GlobalContextProvider>
   );
 }
 
