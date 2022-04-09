@@ -23,11 +23,12 @@ async function fetchLogin(login) {
     })    
 }
 
-async function handleClick(navigate, login, setIdLogin, setToken, setLogged) {
+async function handleClick(navigate, login, setIdLogin, setToken, setCpf, setLogged) {
     const response = await fetchLogin(login)
     const data = await response.json()
     if (data.mensagem === "OK") {
         setToken( data.token )   
+        setCpf( '27' )   
         const auxToken = data.token
 
         const second = await fetchTemFamilia(auxToken)
@@ -49,6 +50,7 @@ const Login = () => {
     const [senha, setSenha] = useState('');
     
     const { id_login, setIdLogin } = useContext(GlobalContext) 
+    const { cpf, setCpf } = useContext(GlobalContext) 
     const { token, setToken } = useContext(GlobalContext) 
     
     let navigate = useNavigate();
@@ -57,7 +59,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const login = { email, senha };
-        handleClick(navigate, login, setIdLogin, setToken, setLogged)
+        handleClick(navigate, login, setIdLogin, setToken, setCpf, setLogged)
     }
 
     return (

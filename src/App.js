@@ -19,7 +19,9 @@ import FamiliaDados from './pages/familia/dados';
 import FamiliaSemContas from './pages/familia/semContas';
 
 import AddAccount from './pages/add_account/addAccount';
-import GlobalContextProvider, { GlobalContext } from './context/GlobalContext';
+import GlobalContextProvider from './context/GlobalContext';
+import SemContas from './pages/home/semContas';
+import Consentimentos from './pages/consentimentos/consentimentos';
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
 
           {/* home */}
           <Route path="/home/noAccounts/" element={<Home />} />
+          <Route path="/home/test/" element={<SemContas />} />
 
 
           {/* family */}
@@ -50,6 +53,9 @@ function App() {
 
           {/* family */}
           <Route path="/add_account/" element={<AddAccount />} />
+        
+          {/* configuracoes */}
+          <Route path="/consentimentos/" element={<Consentimentos />} />
 
         </Routes>
       </div>

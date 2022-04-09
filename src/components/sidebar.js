@@ -24,7 +24,7 @@ export const SidebarData = [
   },
   {
     title: 'Controle seus dados',
-    path: '/settings',
+    path: '/consentimentos',
     icon: <GoIcons.GoSettings />,
     className: 'nav-text'
   },

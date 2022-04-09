@@ -3,9 +3,9 @@ import { GlobalContext } from '../../context/GlobalContext';
 
 import Navbar from '../../components/Navbar';
 
-const AddAccount = () => {
+const Consentimentos = () => {
     const { cpf } = useContext(GlobalContext) 
-    let destino = `http://localhost:3001/compartilhamento/?cpf=${cpf}`
+    let destino = `http://localhost:3001/consentimentos/?cpf=${cpf}`
     return (       
         <div>
             <Navbar/>
@@ -13,7 +13,7 @@ const AddAccount = () => {
             <br/>
             <br/>
             <br/>
-            <h3>Redirecione para a página do Open Banking para adicionar nova conta.</h3>
+            <h3>Redirecione para a página do Open Banking para gerenciar consentimentos.</h3>
             <br/>
             <br/>
             <a href={destino} target='_blank'><button>Ir para OB</button></a>
@@ -21,4 +21,4 @@ const AddAccount = () => {
     )
 }
    
-export default AddAccount;
+export default Consentimentos;
