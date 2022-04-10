@@ -22,6 +22,7 @@ import AddAccount from './pages/add_account/addAccount';
 import GlobalContextProvider from './context/GlobalContext';
 import SemContas from './pages/home/semContas';
 import Consentimentos from './pages/consentimentos/consentimentos';
+import Sucesso from './pages/add_account/sucesso';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
 
           {/* family */}
           <Route path="/add_account/" element={<AddAccount />} />
+          <Route path="/sucesso/" element={<Sucesso />} />
         
           {/* configuracoes */}
           <Route path="/consentimentos/" element={<Consentimentos />} />

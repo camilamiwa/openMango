@@ -3,24 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import { GlobalContext } from '../../context/GlobalContext';
 
-async function fetchFamilia(token, join_family) {
+async function fetchFamilia(tokenJWT, join_family) {
     return fetch('http://localhost:5000/entrarfamilia', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            'x-access-token': token
+            'x-access-token': tokenJWT
         },
         body: JSON.stringify(join_family)
     })
 }
 
-async function handleClick(token, join_family,
+async function handleClick(tokenJWT, join_family,
     navigate,
     setShowIdFamiliyMsg,
     setShowPasswordMsg,
     setid_familia,
     setsenha) {
-        const response = await fetchFamilia(token, join_family)
+        const response = await fetchFamilia(tokenJWT, join_family)
         const data = await response.json()
         if (data.mensagem === "INC_OU_NEX") {
             setShowIdFamiliyMsg(false)
@@ -42,14 +42,17 @@ const FamiliaEntrar = () => {
     const [senha, setsenha] = useState('');
     const [showPasswordMsg, setShowPasswordMsg] = useState(true);
     const [showIdFamiliyMsg, setShowIdFamiliyMsg] = useState(true);
-    const { token } = useContext(GlobalContext) 
+    // const { tokenJWT } = useContext(GlobalContext) 
+    
+    const tokenJWT = document.cookie.split('tokenJWT=')[1].split(';')[0]
+    const id_login = document.cookie.split('id_login=')[1].split(';')[0]         
     
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const join_family = { id_familia, senha };
-        handleClick(token, join_family,
+        handleClick(tokenJWT, join_family,
             navigate,
             setShowIdFamiliyMsg,
             setShowPasswordMsg,

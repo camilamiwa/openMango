@@ -3,23 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import { GlobalContext } from '../../context/GlobalContext';
 
-async function fetchFamilia(token, new_family) {
+async function fetchFamilia(tokenJWT, new_family) {
     return fetch('http://localhost:5000/criarfamilia', {
         method: 'POST',
         headers: { 
             "Content-Type": "application/json",
-            'x-access-token': token
+            'x-access-token': tokenJWT
         },
         body: JSON.stringify(new_family)
     })
 }
 
-async function handleClick(token, new_family,
+async function handleClick(tokenJWT, new_family,
     navigate,
     setShowMessage,
     setIdFamilia,
     setSenhaFamilia) {
-        const response = await fetchFamilia(token, new_family)
+        const response = await fetchFamilia(tokenJWT, new_family)
         const data = await response.json()
         if (data.mensagem === "ID_NAO_DISPONIVEL") {
             setShowMessage(false)
@@ -35,14 +35,17 @@ const FamiliaCriar = () => {
     const [nome, setNomeFamilia] = useState('');
     const [senha, setSenhaFamilia] = useState('');
     const [showMessage, setShowMessage] = useState(true);
-    const { token } = useContext(GlobalContext) 
+    // const { tokenJWT } = useContext(GlobalContext) 
+    
+    const tokenJWT = document.cookie.split('tokenJWT=')[1].split(';')[0]
+    const id_login = document.cookie.split('id_login=')[1].split(';')[0] 
     
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const new_family = { id_familia, nome, senha };         
-        handleClick(token, new_family,
+        handleClick(tokenJWT, new_family,
             navigate,
             setShowMessage,
             setIdFamilia,

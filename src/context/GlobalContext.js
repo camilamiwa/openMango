@@ -1,13 +1,13 @@
 import React, { createContext, useState } from 'react'
 export const GlobalContext = createContext()
 const GlobalContextProvider = (props) => {
-    const [ token, setToken ] = useState('')
+    const [ tokenJWT, setTokenJWT ] = useState('')
     const [ cpf, setCpf ] = useState('')
     const [ id_login, setIdLogin ] = useState('')
     return (
          <GlobalContext.Provider 
             value={{
-                token, setToken,
+                tokenJWT, setTokenJWT,
                 cpf, setCpf,
                 id_login, setIdLogin
              }}>

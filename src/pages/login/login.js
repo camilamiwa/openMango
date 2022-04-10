@@ -6,11 +6,11 @@ import { GlobalContext } from '../../context/GlobalContext';
 
 import './login.css';
 
-async function fetchTemFamilia(token) {
+async function fetchTemFamilia(tokenJWT) {
     return fetch('http://localhost:5000/temfamilia', {
         method: 'GET',
         headers: { 
-            'x-access-token': token
+            'x-access-token': tokenJWT
         }
     })
 }
@@ -23,12 +23,15 @@ async function fetchLogin(login) {
     })    
 }
 
-async function handleClick(navigate, login, setIdLogin, setToken, setCpf, setLogged) {
+async function handleClick(navigate, login, setIdLogin, setTokenJWT, setCpf, setLogged) {
     const response = await fetchLogin(login)
     const data = await response.json()
     if (data.mensagem === "OK") {
-        setToken( data.token )   
-        setCpf( '27' )   
+        setTokenJWT( data.token )   
+        document.cookie = `tokenJWT=${ data.token }`
+        document.cookie = `id_login=${ data.id_login }`
+        document.cookie = `cpf=${ data.cpf }`
+        // setCpf( '27' )   
         const auxToken = data.token
 
         const second = await fetchTemFamilia(auxToken)
@@ -51,7 +54,7 @@ const Login = () => {
     
     const { id_login, setIdLogin } = useContext(GlobalContext) 
     const { cpf, setCpf } = useContext(GlobalContext) 
-    const { token, setToken } = useContext(GlobalContext) 
+    const { tokenJWT, setTokenJWT } = useContext(GlobalContext) 
     
     let navigate = useNavigate();
     const [logged, setLogged] = useState(true);
@@ -59,7 +62,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const login = { email, senha };
-        handleClick(navigate, login, setIdLogin, setToken, setCpf, setLogged)
+        handleClick(navigate, login, setIdLogin, setTokenJWT, setCpf, setLogged)
     }
 
     return (

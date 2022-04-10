@@ -24,7 +24,6 @@ const Cadastro = () => {
             body: JSON.stringify(user)
         })
         .then(response => response.json())
-        // .then(data => console.log(data.mensagem));
         .then(data => {data.mensagem === "OK" ? navigate("/cadastro/successful/") : navigate("/cadastro/failed/")});
     }
 

@@ -4,20 +4,20 @@ import Navbar from '../../components/Navbar';
 import { GlobalContext } from '../../context/GlobalContext';
 import './home.css';
 
-async function fetchContasInfo(token) {
+async function fetchContasInfo( tokenJWT ) {
   return fetch('http://localhost:5000/centralizarcontas', {
       method: 'GET', 
       headers: { 
-        'x-access-token': token
+        'x-access-token': tokenJWT
       }
   });    
 }
 
-async function handleFetch(token, 
+async function handleFetch(tokenJWT, 
   setUsers,
   setSaldoCC,
   setSaldoPP) {  
-    const response = await fetchContasInfo(token)
+    const response = await fetchContasInfo(tokenJWT)
     const data = await response.json()
     setUsers(data["membros"])
     setSaldoCC(parseFloat(data["saldo_cc"]))
@@ -29,10 +29,13 @@ const FamiliaDados= () => {
     const [saldoPP, setSaldoPP] = useState('');
     const [users, setUsers] = useState(['']);
   
-    const { token } = useContext(GlobalContext) 
+    // const { tokenJWT } = useContext(GlobalContext) 
+    
+    const tokenJWT = document.cookie.split('tokenJWT=')[1].split(';')[0]
+    const id_login = document.cookie.split('id_login=')[1].split(';')[0] 
 
     useEffect(() => {
-      handleFetch(token, 
+      handleFetch(tokenJWT, 
         setUsers,
         setSaldoCC,
         setSaldoPP)
