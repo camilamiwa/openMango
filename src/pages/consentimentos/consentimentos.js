@@ -4,8 +4,9 @@ import { GlobalContext } from '../../context/GlobalContext';
 import Navbar from '../../components/Navbar';
 
 const Consentimentos = () => {
-    const { cpf } = useContext(GlobalContext) 
-    let destino = `http://localhost:3001/consentimentos/?cpf=${cpf}`
+    const cpf = document.cookie.split('cpf=')[1].split(';')[0]
+
+    let destino = `http://localhost:3001/gestao/?cpf=${cpf}`
     return (       
         <div>
             <Navbar/>

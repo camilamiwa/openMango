@@ -6,25 +6,25 @@ import * as RiIcons from 'react-icons/ri';
 export const SidebarData = [
   {
     title: 'Minhas contas',
-    path: '/my_accounts',
+    path: '/my_accounts/',
     icon: <MdIcons.MdOutlineAccountBalanceWallet />,
     className: 'nav-text'
   },
   {
     title: 'Adicionar conta',
-    path: '/add_account',
+    path: '/add_account/',
     icon: <MdIcons.MdAttachMoney />,
     className: 'nav-text'
   },
   {
     title: 'Família',
-    path: '/family',
+    path: '/family/',
     icon: <RiIcons.RiHomeHeartFill />,
     className: 'nav-text'
   },
   {
     title: 'Controle seus dados',
-    path: '/consentimentos',
+    path: '/consentimentos/',
     icon: <GoIcons.GoSettings />,
     className: 'nav-text'
   },

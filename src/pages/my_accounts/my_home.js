@@ -15,14 +15,19 @@ async function fetchContasInfo(tokenJWT) {
 }
 
 async function handleFetch(tokenJWT, 
+  id_login,
   setAccounts,
   setSaldoCC,
   setSaldoPP) {  
     const response = await fetchContasInfo(tokenJWT)
     const data = await response.json()
-    setAccounts(data["membros"][0]["contas"])
-    setSaldoCC(parseFloat(data["membros"][0]["saldo_cc"]))
-    setSaldoPP(parseFloat(data["membros"][0]["saldo_pp"]))
+    
+    const aux_user_data = data["membros"].filter( element => element.id_usuario == id_login)
+    const user_data = aux_user_data[0]
+
+    setAccounts(user_data["contas"])
+    setSaldoCC(parseFloat(user_data["saldo_cc"]))
+    setSaldoPP(parseFloat(user_data["saldo_pp"]))
 }
 
 const MeusDados = () => {
@@ -34,9 +39,10 @@ const MeusDados = () => {
     
     const tokenJWT = document.cookie.split('tokenJWT=')[1].split(';')[0]
     const id_login = document.cookie.split('id_login=')[1].split(';')[0]
-
+    
     useEffect(() => {
-      handleFetch(tokenJWT, 
+      handleFetch(tokenJWT,
+        id_login, 
         setAccounts,
         setSaldoCC,
         setSaldoPP)

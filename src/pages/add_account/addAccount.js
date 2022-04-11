@@ -3,8 +3,7 @@ import { GlobalContext } from '../../context/GlobalContext';
 
 import Navbar from '../../components/Navbar';
 
-const AddAccount = () => {
-    
+const AddAccount = () => {    
     const cpf = document.cookie.split('cpf=')[1].split(';')[0]
     
     let destino = `http://localhost:3001/compartilhamento/?cpf=${cpf}`
