@@ -6,7 +6,7 @@ import { GlobalContext } from '../../context/GlobalContext';
 import './my_home.css';
 
 async function fetchContasInfo(tokenJWT) {
-  return fetch('http://localhost:5000/centralizarcontas', {
+  return fetch('https://acc-manager.southindia.cloudapp.azure.com/centralizarcontas', {
       method: 'GET', 
       headers: { 
         'x-access-token': tokenJWT

@@ -18,7 +18,7 @@ const Cadastro = () => {
         e.preventDefault();
         const user = { nome, nascimento, cpf, endereco, telefone, email, senha };
         
-        fetch('http://localhost:5000/cadastrar', {
+        fetch('https://acc-manager.southindia.cloudapp.azure.com/cadastrar', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)

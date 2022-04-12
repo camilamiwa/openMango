@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 
 async function fetchContas(tokenJWT, new_account) {
-    return fetch('http://localhost:5000/addconta', {
+    return fetch('https://acc-manager.southindia.cloudapp.azure.com/addconta', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",

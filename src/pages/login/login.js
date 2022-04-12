@@ -7,7 +7,7 @@ import { GlobalContext } from '../../context/GlobalContext';
 import './login.css';
 
 async function fetchTemFamilia(tokenJWT) {
-    return fetch('http://localhost:5000/temfamilia', {
+    return fetch('https://acc-manager.southindia.cloudapp.azure.com/temfamilia', {
         method: 'GET',
         headers: { 
             'x-access-token': tokenJWT
@@ -16,7 +16,7 @@ async function fetchTemFamilia(tokenJWT) {
 }
 
 async function fetchLogin(login) {
-    return fetch('http://localhost:5000/login', {
+    return fetch('https://acc-manager.southindia.cloudapp.azure.com/login', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(login)

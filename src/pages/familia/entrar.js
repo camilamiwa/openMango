@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar';
 import { GlobalContext } from '../../context/GlobalContext';
 
 async function fetchFamilia(tokenJWT, join_family) {
-    return fetch('http://localhost:5000/entrarfamilia', {
+    return fetch('https://acc-manager.southindia.cloudapp.azure.com/entrarfamilia', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
