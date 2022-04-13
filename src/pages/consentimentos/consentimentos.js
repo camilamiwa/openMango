@@ -6,7 +6,7 @@ import Navbar from '../../components/Navbar';
 const Consentimentos = () => {
     const cpf = document.cookie.split('cpf=')[1].split(';')[0]
 
-    let destino = `http://localhost:3001/gestao/?cpf=${cpf}`
+    let destino = `https://acc-manager.southindia.cloudapp.azure.com/openbanking-front/gestao/?cpf=${cpf}`
     return (       
         <div>
             <Navbar/>

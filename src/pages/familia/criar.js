@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar';
 import { GlobalContext } from '../../context/GlobalContext';
 
 async function fetchFamilia(tokenJWT, new_family) {
-    return fetch('https://acc-manager.southindia.cloudapp.azure.com/criarfamilia', {
+    return fetch('https://acc-manager.southindia.cloudapp.azure.com/mangobank-back/criarfamilia', {
         method: 'POST',
         headers: { 
             "Content-Type": "application/json",

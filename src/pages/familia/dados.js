@@ -5,7 +5,7 @@ import { GlobalContext } from '../../context/GlobalContext';
 import './home.css';
 
 async function fetchContasInfo( tokenJWT ) {
-  return fetch('https://acc-manager.southindia.cloudapp.azure.com/centralizarcontas', {
+  return fetch('https://acc-manager.southindia.cloudapp.azure.com/mangobank-back/centralizarcontas', {
       method: 'GET', 
       headers: { 
         'x-access-token': tokenJWT
