@@ -18,7 +18,7 @@ const Cadastro = () => {
         e.preventDefault();
         const user = { nome, nascimento, cpf, endereco, telefone, email, senha };
         
-        fetch('https://acc-manager.southindia.cloudapp.azure.com/cadastrar', {
+        fetch('https://acc-manager.southindia.cloudapp.azure.com/mangobank-back/cadastrar', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)

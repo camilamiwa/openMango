@@ -10,7 +10,7 @@ const FamiliaHome = () => {
     const tokenJWT = document.cookie.split('tokenJWT=')[1].split(';')[0]
     
 
-  fetch('https://acc-manager.southindia.cloudapp.azure.com/temfamilia', {
+  fetch('https://acc-manager.southindia.cloudapp.azure.com/mangobank-back/temfamilia', {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",

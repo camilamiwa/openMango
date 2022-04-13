@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 
 async function fetchContas(tokenJWT, new_account) {
-    return fetch('https://acc-manager.southindia.cloudapp.azure.com/addconta', {
+    return fetch('https://acc-manager.southindia.cloudapp.azure.com/mangobank-back/addconta', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",

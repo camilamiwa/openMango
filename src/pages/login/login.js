@@ -7,7 +7,7 @@ import { GlobalContext } from '../../context/GlobalContext';
 import './login.css';
 
 async function fetchTemFamilia(tokenJWT) {
-    return fetch('https://acc-manager.southindia.cloudapp.azure.com/temfamilia', {
+    return fetch('https://acc-manager.southindia.cloudapp.azure.com/mangobank-back/temfamilia', {
         method: 'GET',
         headers: { 
             'x-access-token': tokenJWT
@@ -16,7 +16,7 @@ async function fetchTemFamilia(tokenJWT) {
 }
 
 async function fetchLogin(login) {
-    return fetch('https://acc-manager.southindia.cloudapp.azure.com/login', {
+    return fetch('https://acc-manager.southindia.cloudapp.azure.com/mangobank-back/login', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(login)
