@@ -33,7 +33,6 @@ const Sucesso = () => {
     let hash = loc.hash.slice(1, );
     // console.log(hash)
 
-    // http://localhost:3001/sucesso/#token_type=Bearer&access_token=pVfjCd163h9xj3pYZ0Uj7v6LSbVOpXDke13RnPilDC&cpf=90841038074&bank_id=2
     let token = hash.split('&')[1].split('=')[1];
     let cpf = hash.split('&')[2].split('=')[1];
     let id_banco = hash.split('&')[3].split('=')[1];
